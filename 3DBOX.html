@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <style>
+            :root {
+                --size: 25vmin;
+                --count: 2;
+                --max-space: 3vmin;
+                --anim-dur: 10s;
+                --bg-color: #5f7192;
+                --color1: hsla(12, 77%, 68%, 1);
+                --color2: hsla(329, 64%, 48%, 1);
+                --color3: hsla(246, 96%, 73%, 1);
+                --side-x: 0deg;
+                --side-y: 0deg;
+                --opacity: 1;
+                --bgsize :100% 100%;
+            }
+            .stage{
+                width: calc(var(--size) * 3 + var(--space) * (var(--count) - 1));
+                height: calc(var(--size) * 3 + var(--space) * (var(--count) - 1));
+                perspective: 1000px;
+            }
+            body{
+                display :flex;
+                /* 水平置中 */
+                justify-content: center;    
+                /* 垂直置中 */
+                align-items: center;   
+            }
+            .container{
+                display :flex;
+                /* 水平置中 */
+                justify-content: center;    
+                /* 垂直置中 */
+                align-items: center;   
+                width: calc(var(--size) * 3 + var(--space) * (var(--count) - 1));
+                height: calc(var(--size) * 3 + var(--space) * (var(--count) - 1));
+                transform-style: preserve-3d;
+                animation: rotate var(--anim-dur) linear infinite;
+            }
+            .cube{
+                
+                --offset: calc((var(--count) - 1) * var(--space));
+                width: var(--size);
+                height: var(--size);
+                position: absolute;
+                transform-style: preserve-3d;
+                transform: translate3d( calc(var(--size) * var(--x) + var(--space) * var(--x) - var(--offset)), calc(var(--size) * var(--y) + var(--space) * var(--y) - var(--offset)), calc(var(--size) * var(--z) + var(--space) * var(--z)) );
+                animation: space linear alternate infinite;
+            }
+            .cube > div {
+                position: absolute;
+                width: var(--size);
+                height: var(--size);
+                transform: rotateX(var(--side-x)) rotateY(var(--side-y))
+                    translateZ(calc(var(--size) / 2));
+                opacity: var(--opacity);
+                background-size: var(--bgsize);
+            }
+            .cube .front {
+                background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+
+            .cube .back {
+            --side-x: 180deg;
+            background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+
+            .cube .right {
+            --side-y: 90deg;
+            background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+
+            .cube .left {
+            --side-y: -90deg;
+            background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+
+            .cube .top {
+            --side-x: 90deg;
+            background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+
+            .cube .bottom {
+            --side-x: -90deg;
+            background-image: url(https://imgs.gvm.com.tw/upload/gallery/20221204/125075.jpg);
+            }
+        
+
+            @keyframes rotate {
+            to {
+                transform: rotate3d(var(--rot-x), var(--rot-y), 0, 360deg);
+            }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="stage">
+        <div class="container" style="--rot-x: -1; --rot-y: -1;">
+            <div class="cube" style="--x:0;--y:0;--z:-1;">
+                <div class="front"></div>
+                <div class="back"></div>
+                <div class="right"></div>
+                <div class="left"></div>
+                <div class="top"></div>
+                <div class="bottom"></div>
+            </div>
+        </div> </div>
+        <script>
+        </script>
+    </body>
+</html>
